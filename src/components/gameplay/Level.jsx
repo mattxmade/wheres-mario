@@ -2,26 +2,16 @@ import React, { Fragment, useState, useRef } from "react";
 
 import questionIcon from "../../assets/items/block_question.png";
 import SuperstarCard from "./SuperstarCard";
-import useMap from "../hooks/useMap";
+import ImageMap from "../../game/ImageMap.module";
 
 const Level = (props) => {
-  const { checkMapPosition } = useMap();
+  const { checkMapPosition, calculateUserPosition } = ImageMap;
 
   const listItemsRef = useRef();
   const [visible, setVisible] = useState(false);
 
   const locatorBoxRef = useRef();
   const foundLocationRef = useRef();
-
-  const calculateUserPosition = (e) => {
-    const { x, y } = e.target.parentNode.getBoundingClientRect();
-    const { clientX, clientY, target } = e;
-
-    const clickX = clientX + target.parentNode.scrollLeft - x;
-    const clickY = clientY - y;
-
-    return { clickX, clickY };
-  };
 
   const handleListItems = (boolean) => {
     setVisible(boolean);
@@ -65,8 +55,6 @@ const Level = (props) => {
 
     style.visibility = "visible";
     handleListItems(false);
-
-    //listItemsRef.current.style.visibility = "hidden";
     foundLocationRef.current = "";
   };
 
@@ -90,7 +78,6 @@ const Level = (props) => {
 
     style.visibility = "hidden";
     handleListItems(false);
-    //listItemsRef.current.style.visibility = "hidden";
   };
 
   return (

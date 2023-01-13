@@ -24,11 +24,27 @@ const Level = (props) => {
     // validate position against backend level data
     const foundValidItem = checkMapPosition(levelData, e, foundPositions);
 
-    const includesGroup = foundValidItem.name.includes(
+    if (!foundValidItem) {
+      const { clickX, clickY } = calculateUserPosition(e);
+
+      style.top = clickY - 32 + "px";
+      style.left = clickX - 32 + "px";
+      style.width = "64px";
+      style.height = "64px";
+
+      style.visibility = "visible";
+      handleListItems(false);
+      foundLocationRef.current = "";
+
+      return;
+    }
+
+    const itemRefGroup = foundValidItem.name.includes(
       props.levelTools.items.group
     );
 
-    if (foundValidItem && includesGroup) {
+    // found an item!
+    if (itemRefGroup) {
       const { x, y, w, h } = foundValidItem;
 
       style.top = y + "px";
@@ -42,17 +58,6 @@ const Level = (props) => {
       foundLocationRef.current = foundValidItem;
       return;
     }
-
-    const { clickX, clickY } = calculateUserPosition(e);
-
-    style.top = clickY - 32 + "px";
-    style.left = clickX - 32 + "px";
-    style.width = "64px";
-    style.height = "64px";
-
-    style.visibility = "visible";
-    handleListItems(false);
-    foundLocationRef.current = "";
   };
 
   const invalidLocation = () => {

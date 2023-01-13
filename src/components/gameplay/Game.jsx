@@ -19,28 +19,6 @@ const onSuccess = [
   "Awesome! You found ",
 ];
 
-const shuffleIndexOrder = (array, stopper) => {
-  const shuffledArray = [];
-  let uniqueIndex = 0;
-
-  const arrayIndexRandomiser = (array) => {
-    return Math.floor(Math.random() * array.length);
-  };
-
-  while (uniqueIndex < stopper) {
-    const newIndex = arrayIndexRandomiser(array);
-
-    if (!shuffledArray.includes(newIndex)) {
-      uniqueIndex++;
-      shuffledArray.push(newIndex);
-    }
-
-    if (uniqueIndex === stopper) break;
-  }
-
-  return shuffledArray.map((val) => array[val]);
-};
-
 const Game = (props) => {
   const mainRef = useRef();
   const wheresMarioGame = GameLogic;
@@ -93,6 +71,8 @@ const Game = (props) => {
 
   const handleSetChoiceList = (array) => {
     if (!array) return;
+
+    const { shuffleIndexOrder } = wheresMarioGame;
 
     const nameList = [...new Array(array.length)].map(
       (item, index) => (item = array[index].name)

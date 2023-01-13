@@ -19,18 +19,16 @@ const Level = (props) => {
 
   const handleUserMapPosition = (e) => {
     const { style } = locatorBoxRef.current;
+    const { levelData, foundPositions } = props;
 
     // validate position against backend level data
-    const foundValidItem = checkMapPosition(
-      props.levelData,
-      e,
-      props.foundPositions
+    const foundValidItem = checkMapPosition(levelData, e, foundPositions);
+
+    const includesGroup = foundValidItem.name.includes(
+      props.levelTools.items.group
     );
 
-    if (
-      foundValidItem &&
-      foundValidItem.name.includes(props.levelTools.items.group)
-    ) {
+    if (foundValidItem && includesGroup) {
       const { x, y, w, h } = foundValidItem;
 
       style.top = y + "px";
@@ -41,7 +39,6 @@ const Level = (props) => {
       style.visibility = "visible";
       handleListItems(true);
 
-      //listItemsRef.current.style.visibility = "visible";
       foundLocationRef.current = foundValidItem;
       return;
     }
@@ -68,11 +65,16 @@ const Level = (props) => {
   const handleLocation = (e) => {
     if (!foundLocationRef.current) return invalidLocation();
 
-    props.handleFoundItem(foundLocationRef.current);
+    const character = e.target.textContent;
+    const charAtLoc = foundLocationRef.current.name;
+
+    if (character === charAtLoc) {
+      props.handleFoundItem(e.target.textContent, foundLocationRef.current);
+    }
 
     foundLocationRef.current = "";
 
-    const { style } = e.target;
+    const { style } = locatorBoxRef.current;
     style.width = "64px";
     style.height = "64px";
 
@@ -86,7 +88,6 @@ const Level = (props) => {
         ref={locatorBoxRef}
         className="locator-box"
         style={{ visibility: "hidden" }}
-        onClick={handleLocation}
       >
         {visible ? (
           <div className="locator-box__popup-container">
@@ -97,7 +98,7 @@ const Level = (props) => {
                   <p>{charName}</p>
                 </li>
               ))}
-            </ul>{" "}
+            </ul>
           </div>
         ) : null}
       </div>

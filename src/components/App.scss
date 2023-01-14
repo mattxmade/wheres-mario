@@ -3,9 +3,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@700&family=Rubik+Mono+One&family=Seymour+One&family=Staatliches&display=swap");
 
-//timer
-@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
-
 :root {
   --tile-height: 64px;
   --border-radius: 0.5rem;
@@ -49,10 +46,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  // background-image: url("../assets/background.png");
-  // background-repeat: repeat;
-  // background-position: left top;
 }
 
 .wrapper {
@@ -66,16 +59,9 @@ body {
   justify-content: space-between;
 
   @include mq(large) {
-    padding: 1rem;
     padding: 0;
-
-    align-items: center;
-    flex-direction: column-reverse;
-    flex-direction: column;
-  }
-
-  @include mq(large) {
     align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -173,18 +159,12 @@ aside {
   max-width: 33rem;
   position: relative;
 
-  //outline: var(--outline);
-
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
   background-color: rgba(10, 13, 16, 0.271);
 
   @include mq(large) {
     flex: none;
-    max-width: none;
-  }
-
-  @include mq(large) {
     max-width: 34rem;
 
     top: 1.5rem;
@@ -211,15 +191,11 @@ aside {
   @include mq(large) {
     gap: 1rem;
     padding: 1rem;
+    padding: 0.5rem 0.5rem;
 
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: start;
-  }
-
-  @include mq(large) {
-    gap: 1rem;
-    padding: 0.5rem 0.5rem;
   }
 }
 
@@ -231,7 +207,6 @@ aside {
   align-items: center;
   flex-direction: column;
 
-  //outline: var(--outline);
   box-shadow: 0 0 0.2rem 0.1rem rgb(143, 143, 143), var(--box-shadow-inset);
   border-radius: var(--border-radius);
   background-color: dodgerblue;
@@ -259,7 +234,6 @@ aside {
   width: 128px;
   height: 128px;
 
-  // outline: var(--outline);
   border-radius: 100%;
   background-color: royalblue;
 
@@ -283,9 +257,6 @@ aside {
 
   @include mq(large) {
     font-size: 100%;
-  }
-
-  @include mq(large) {
     position: absolute;
     visibility: hidden;
   }
@@ -302,13 +273,6 @@ aside {
 
   display: flex;
   justify-content: space-around;
-
-  @include mq(large) {
-    margin: 0 5rem;
-    width: 12rem;
-    align-items: center;
-    justify-content: space-between;
-  }
 
   @include mq(large) {
     position: absolute;
@@ -341,8 +305,6 @@ aside {
   font-size: 3rem;
   text-align: center;
   font-family: "Anton", sans-serif;
-
-  //outline: var(--outline);
   border-radius: var(--border-radius);
 
   @include mq(large) {
@@ -364,7 +326,6 @@ aside {
 
 // timers
 .time {
-  // font-family: "Orbitron", sans-serif;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -380,7 +341,6 @@ aside {
 // find
 .player-objectives,
 .player-objectives h3 {
-  //outline: var(--outline);
   border-radius: var(--border-radius);
 }
 
@@ -399,19 +359,13 @@ aside {
   background-color: #75667e;
 
   @include mq(large) {
-    gap: 1rem;
-    min-height: auto;
-    flex-direction: row;
-  }
-
-  @include mq(large) {
     width: auto;
-    flex: auto;
-    gap: 1rem;
-    min-height: auto;
-    flex-direction: row;
-
     padding: 0.1rem;
+    min-height: auto;
+
+    gap: 1rem;
+    flex: auto;
+    flex-direction: row;
   }
 
   @include mq(large) {
@@ -430,7 +384,7 @@ aside {
     width: 1rem;
     font-size: 100%;
     overflow-wrap: break-word;
-    align-self: flex-start; /*problem : needs display: flex rather than block ???*/
+    align-self: flex-start;
   }
 
   @include mq(large) {
@@ -449,17 +403,8 @@ aside {
   align-items: center;
   justify-content: space-evenly;
 
-  //outline: var(--outline);
   border-radius: var(--border-radius);
   background-color: darkslategrey;
-
-  @include mq(large) {
-    width: auto;
-    height: 85px;
-
-    padding: 1rem;
-    flex-wrap: nowrap;
-  }
 
   @include mq(large) {
     padding: 0.5rem;
@@ -474,11 +419,6 @@ aside {
   position: relative;
   border-radius: var(--border-radius); // 100%
   background-color: lightblue;
-
-  @include mq(large) {
-    // width: clamp(64px, 100%, 128px); /* element.style */
-    // height: clamp(64px, 100%, 128px); /* element.style *
-  }
 }
 
 .item-mask {
@@ -496,11 +436,6 @@ aside {
     width: auto;
     height: inherit;
   }
-
-  @include mq(large) {
-    width: auto;
-    height: inherit;
-  }
 }
 
 nav {
@@ -508,9 +443,6 @@ nav {
 
   @include mq(large) {
     position: absolute;
-  }
-
-  @include mq(large) {
     visibility: hidden;
   }
 }
@@ -642,231 +574,6 @@ nav #user-like:visited {
   }
 }
 
-dialog {
-  margin: auto;
-  width: 50%;
-  height: 25%;
-
-  border-radius: var(--border-radius);
-}
-
-.tag-content {
-  width: 100%;
-  height: 100%;
-
-  display: grid;
-  align-items: center;
-}
-
-.tag-content input {
-  padding: 0.5rem;
-  width: 75%;
-  justify-self: center;
-}
-
-.tag-content i {
-  cursor: pointer;
-  text-align: center;
-}
-
-.editor-wheel {
-  z-index: 20;
-
-  left: 2rem;
-  bottom: 2rem;
-
-  margin: auto;
-  position: absolute;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: var(--border-radius);
-  background-color: darkslategrey;
-}
-
-.editor-wheel li {
-  margin: 1rem;
-}
-
-.editor-wheel li > p {
-  text-align: center;
-  min-width: 19rem;
-}
-.editor-wheel li:last-child {
-  margin-left: 4rem;
-}
-
-.editor-wheel li {
-  position: relative;
-
-  font-size: 2.6rem;
-  color: whitesmoke;
-}
-
-// level selector
-.editor-wheel .level-selector {
-  top: -6.5rem;
-  position: absolute;
-
-  gap: 1rem;
-  display: flex;
-}
-
-// specificity needs attention | margin !!
-.editor-wheel .level-selector li {
-  cursor: pointer;
-
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 100%;
-  background-color: darkslategrey;
-
-  margin: 0;
-
-  border-radius: 100%;
-  border: 0.2rem solid rgb(110, 110, 110);
-  transition: 0.15s;
-
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-
-.level-selector li:hover {
-  border: 0.2rem solid lightblue;
-}
-
-.editor-wheel .level-selector p {
-  font-size: 1.8rem;
-  min-width: auto;
-}
-
-// aside panels
-.items-panel,
-.map-positions-panel {
-  inset: 0;
-  z-index: 1;
-  position: absolute;
-
-  padding: 2rem;
-
-  overflow: hidden;
-  overflow-y: scroll;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  background-color: darkslategrey;
-}
-
-// items panel
-.items-panel__img:hover {
-  cursor: grab;
-}
-
-// map items position editor panel
-.map-positions-panel {
-  width: 100%;
-  z-index: 2;
-
-  gap: 1rem;
-  align-content: flex-start;
-  // flex-direction: column;
-  // justify-content: flex-start;
-
-  h2,
-  h3,
-  h4,
-  p {
-    color: whitesmoke;
-    font-family: "Chakra Petch", sans-serif;
-  }
-
-  h2 {
-    top: 0.1rem;
-    left: 1rem;
-    position: absolute;
-
-    padding: 0 0.5rem 0 0.2rem;
-    background-color: darkslategrey;
-  }
-}
-
-.map-positions-panel .map-details {
-  width: 100%;
-  height: max-content;
-  padding: 1rem;
-
-  display: flex;
-  flex-direction: column;
-
-  cursor: pointer;
-
-  border-radius: var(--border-radius);
-  border: 0.2rem solid rgb(110, 110, 110);
-  transition: 0.15s;
-}
-
-.map-details:hover {
-  border: 0.2rem solid lightblue;
-}
-
-.map-details__heading {
-  width: 100%;
-  gap: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.map-details__heading h3:last-child {
-  flex: auto;
-  text-align: right;
-}
-
-.map-details__positions {
-  flex: auto;
-  width: 100%;
-}
-
-.map-details__positions__list {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  li {
-    display: grid;
-    gap: 0.3rem;
-  }
-
-  li p:last-child {
-    color: black;
-    width: 5rem;
-    padding: 0.2rem;
-
-    text-align: center;
-    border-radius: 0.5rem;
-    background-color: whitesmoke;
-  }
-}
-
-// Grid
-.grid {
-  z-index: 0;
-
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
-}
-
-.cell {
-  outline: 0.1rem dashed rgb(211, 211, 211, 0.5);
-}
-
 // Character Select
 .character-select {
   padding: 2rem;
@@ -952,25 +659,6 @@ section .avatars img {
   background-color: yellow;
 }
 
-// h2 font-family: "Seymour One", sans-serif;
-
-/*============
-  Scroll bar                                          https://stackoverflow.com/a/66166118
-==============*/
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 1);
-  //border-radius: 20px;
-  border: transparent;
-}
-
 .rotate--0 {
   rotate: (0deg);
   transition: var(--transition-time);
@@ -982,6 +670,7 @@ section .avatars img {
   transform: rotate(90deg);
 }
 
+// game message popup
 .game-message-popup,
 .game-message-popup > div {
   display: flex;
@@ -1018,6 +707,9 @@ section .avatars img {
     img {
       width: 18%;
       height: auto;
+    }
+    img:hover {
+      outline: none;
     }
 
     h2,

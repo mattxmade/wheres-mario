@@ -34,8 +34,6 @@ const LocatorBox = (props) => {
       break;
   }
 
-  console.log(style);
-
   return (
     <div ref={locatorBoxRef} className="locator-box" style={style}>
       {props.visible ? (

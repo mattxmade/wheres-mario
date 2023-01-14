@@ -3,22 +3,18 @@ import React, { Fragment, useState, useRef } from "react";
 import questionIcon from "../../assets/items/block_question.png";
 import SuperstarCard from "./SuperstarCard";
 import ImageMap from "../../game/ImageMap.module";
+import LocatorBox from "./LocatorBox";
 
 const Level = (props) => {
+  const foundLocationRef = useRef();
+  const [visible, setVisible] = useState(false);
+  const [locatorBoxStyle, setLocatorBoxStyle] = useState([["init"], "hidden"]);
+
   const { checkMapPosition, calculateUserPosition } = ImageMap;
 
-  const listItemsRef = useRef();
-  const [visible, setVisible] = useState(false);
-
-  const locatorBoxRef = useRef();
-  const foundLocationRef = useRef();
-
-  const handleListItems = (boolean) => {
-    setVisible(boolean);
-  };
+  const handleListItems = (boolean) => setVisible(boolean);
 
   const handleUserMapPosition = (e) => {
-    const { style } = locatorBoxRef.current;
     const { levelData, foundPositions } = props;
 
     // validate position against backend level data
@@ -27,15 +23,10 @@ const Level = (props) => {
     if (!foundValidItem) {
       const { clickX, clickY } = calculateUserPosition(e);
 
-      style.top = clickY - 32 + "px";
-      style.left = clickX - 32 + "px";
-      style.width = "64px";
-      style.height = "64px";
-
-      style.visibility = "visible";
+      setLocatorBoxStyle([[clickY, clickX], "visible"]);
       handleListItems(false);
-      foundLocationRef.current = "";
 
+      foundLocationRef.current = "";
       return;
     }
 
@@ -47,12 +38,7 @@ const Level = (props) => {
     if (itemRefGroup) {
       const { x, y, w, h } = foundValidItem;
 
-      style.top = y + "px";
-      style.left = x + "px";
-      style.width = w + "px";
-      style.height = h + "px";
-
-      style.visibility = "visible";
+      setLocatorBoxStyle([[y, x, w, h], "visible"]);
       handleListItems(true);
 
       foundLocationRef.current = foundValidItem;
@@ -63,12 +49,12 @@ const Level = (props) => {
   const invalidLocation = () => {
     console.log("Unluckly! Please try again...");
 
-    locatorBoxRef.current.style.visibility = "hidden";
+    setLocatorBoxStyle([["init"], "hidden"]);
     handleListItems(false);
   };
 
   const handleLocation = (e) => {
-    if (!foundLocationRef.current) return invalidLocation();
+    if (!foundLocationRef.current) return invalidLocation(); // map
 
     const character = e.target.textContent;
     const charAtLoc = foundLocationRef.current.name;
@@ -79,34 +65,18 @@ const Level = (props) => {
 
     foundLocationRef.current = "";
 
-    const { style } = locatorBoxRef.current;
-    style.width = "64px";
-    style.height = "64px";
-
-    style.visibility = "hidden";
+    setLocatorBoxStyle([["init"], "hidden"]);
     handleListItems(false);
   };
 
   return (
     <Fragment>
-      <div
-        ref={locatorBoxRef}
-        className="locator-box"
-        style={{ visibility: "hidden" }}
-      >
-        {visible ? (
-          <div className="locator-box__popup-container">
-            <img src={questionIcon} alt="Mario question icon" />
-            <ul className="locator-box__popup-name-list" ref={listItemsRef}>
-              {props.characterList?.map((charName, index) => (
-                <li key={index} onClick={handleLocation}>
-                  <p>{charName}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-      </div>
+      <LocatorBox
+        visible={visible}
+        locatorStyle={locatorBoxStyle}
+        handleLocation={handleLocation}
+        characterList={props.characterList}
+      />
 
       {props.foundItems.length
         ? props.foundItems.map((position, index) => (
